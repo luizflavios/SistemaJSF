@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Lançamentos</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	<p:fieldset legend="Pesquisa" style="margin-top:15px;">
+
+		<h:form>
+			<div class="card">
+				
+				<p:messages id="message" showDetail="true" closable="true" >
+					<p:autoUpdate/>
+				</p:messages>
+	
+				<div class="p-grid  ui-fluid">
+
+				 	<p:selectOneMenu style="width:30%;">
+				
+						<f:selectItem itemLabel="Selecione o Parâmetro" noSelectionOption="true"/>
+					    <f:selectItem itemLabel="Tipo de Serviço" itemValue="Nome"/>
+					    <f:selectItem itemLabel="Data de Cadastro" itemValue="Data de Cadastro"/>
+				
+					</p:selectOneMenu>		
+
+				</div>
+
+
+				<!-- Botões do Formulário -->
+
+				<div class="p-col-12 p-md-4" style="margin-top: 15px;">
+					<p:commandButton icon="pi pi-check" styleClass="ui-button-success"
+						value="Pesquisar"  />					
+				</div>
+
+			</div>
+		</h:form>
+
+	</p:fieldset>
+	
+	<p:fieldset legend="Lançamentos" style="margin-top:15px;">
+	
+		<h:form>
+			
+			<div class="card">
+				<p:dataTable value="#{beanLancamento.listaLancamentos}" var="lancamento" scrollable="true" scrollHeight="250" >
+					<p:column headerText="ID" >
+							<h:outputText value="#{lancamento.id}" />
+					</p:column>
+					<p:column headerText="DEMANDA" >
+							<h:outputText value="#{lancamento.tipoServico}" />
+					</p:column>
+					<p:column headerText="USUÁRIO" >
+							<h:outputText value="#{lancamento.usuarioLancamento.nomeCompleto}" />
+					</p:column>
+					<p:column headerText="DATA CADASTRO" >
+							<h:outputText value="#{lancamento.dataCadastro}" />
+					</p:column>
+					<p:column headerText="DELETAR" >
+							<p:commandButton update="@form" value="Editar" action="#{beanLancamento.delete}">
+								<f:setPropertyActionListener value="#{lancamento}" target="#{beanLancamento.lancamento}"/>
+							</p:commandButton>
+					</p:column>
+					
+				</p:dataTable>
+			</div>
+		</h:form>
+	
+	</p:fieldset>
+
+
+</h:body>
+</html>

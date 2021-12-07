@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Lançamentos</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	<p:fieldset legend="Lançamentos" style="margin-top:15px;">
+
+		<h:form>
+			<div class="card">
+				
+				<p:messages id="message" showDetail="true" closable="true" >
+					<p:autoUpdate/>
+				</p:messages>
+	
+				<div class="p-grid  ui-fluid">
+
+				 	<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-user"></i>
+							</div>
+							<p:selectOneMenu placeholder="Usuário" id="comboUsuarios" converter="usuarioConverter"  style="width:20%;" value="#{beanLancamento.lancamento.usuarioLancamento}">
+								<f:selectItem itemLabel="Usuário" noSelectionOption="true" itemDisabled="true"/>
+								<f:selectItems value="#{beanLancamento.usuarios}" />
+							</p:selectOneMenu>
+							
+
+						</div>
+					</div> 
+
+					<div class="p-col-12 p-md-4" style="margin-top: 5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">Tº</div>
+							<p:inputText placeholder="Tipo do Serviço" value="#{beanLancamento.lancamento.tipoServico}"
+								style="width:20%;" />
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top: 5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">O</div>
+							<p:inputText placeholder="Empresa Origem" style="width:30%;" value="#{beanLancamento.lancamento.empresaOrigem}" />
+
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top: 5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">D</div>
+							<p:inputText placeholder="Empresa Destino" style="width:30%;" value="#{beanLancamento.lancamento.empresaDestino}"/>
+
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top: 5px;">
+						<div class="ui-inputgroup">
+						<div class="ui-inputgroup-addon">
+							<i class="pi pi-map"></i>
+						</div>
+						<p:selectOneMenu value="#{beanLancamento.lancamento.estados}" immediate="true" id="comboEstados" converter="estadoConverter" style="width:7%;">
+							<f:selectItem itemLabel="Estado" noSelectionOption="true" itemDisabled="true" />
+							<f:selectItems value="#{beanLancamento.estados}" />
+							<f:ajax event="change" execute="@this" listener="#{beanLancamento.carregaCidades}" render="comboCidades" />
+						</p:selectOneMenu>
+						<div class="ui-inputgroup-addon">
+							<i class="pi pi-map-marker"></i>
+						</div>
+						<p:selectOneMenu value="#{beanLancamento.lancamento.cidades}" id="comboCidades" immediate="true" converter="cidadesConverter" style="width:20.5%;">
+							<f:selectItem itemLabel="Cidade" noSelectionOption="true" itemDisabled="true"/>
+							<f:selectItems value="#{beanLancamento.cidades}" />
+						</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top: 5px;">
+
+					</div>
+
+				</div>
+
+
+				<!-- Botões do Formulário -->
+
+				<div class="p-col-12 p-md-4" style="margin-top: 15px;">
+					<p:commandButton icon="pi pi-check" styleClass="ui-button-success"
+						value="Salvar" action="#{beanLancamento.salvar}" update="@form"/>
+					<p:commandButton icon="pi pi-check" styleClass="ui-button-warning"
+						value="Limpar" style="margin-left:10px;" type="reset" />
+				</div>
+
+
+			</div>
+		</h:form>
+
+	</p:fieldset>
+
+
+</h:body>
+</html>

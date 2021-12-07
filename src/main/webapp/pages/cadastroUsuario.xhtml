@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de Usuário</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	
+
+	<p:fieldset legend="Cadastro de Usuário" style="margin-top:15px;">
+
+		<h:form>
+			<div class="card">
+			
+				<p:messages id="message" showDetail="true" closable="true" >
+					<p:autoUpdate/>
+				</p:messages>
+				
+				<h5>Dados da Pessoa</h5>
+				<div class="p-grid  ui-fluid">
+				
+					<div class="p-col-12 p-md-4" >
+						<div class="ui-inputgroup">
+						
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-user"></i>
+							</div>
+							<p:inputText placeholder="Usuário" style="width:20%;" value="#{beanPessoa.pessoa.usuario}"/>
+							
+							<div class="ui-inputgroup-addon" style="">
+								<i class="pi pi-lock"></i>
+							</div>
+							<p:inputText placeholder="Senha" type="password" style="width:19.5%;" value="#{beanPessoa.pessoa.senha}"/>
+							
+						</div>
+					</div>					
+				
+					<div class="p-col-12 p-md-4" style="margin-top:5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-user"></i>
+							</div>
+							<p:inputText placeholder="Nome Completo" style="width:42%;" value="#{beanPessoa.pessoa.nomeCompleto}"/>
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top:5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">@</div>
+							<p:inputText placeholder="Email" type="email" style="width:42%;" value="#{beanPessoa.pessoa.email}"/>
+							
+						</div>
+					</div>
+					
+					<div class="p-col-12 p-md-4" style="margin-top:5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">S</div>
+							<p:selectOneMenu value="#{beanPessoa.pessoa.sexo}" style="width:15%;">
+							
+								 <f:selectItem itemLabel="Selecione o Sexo" itemValue="#{beanPessoa.pessoa.sexo}" noSelectionOption="true"/>
+				                 <f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+				                 <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+							
+							</p:selectOneMenu>
+							
+							
+						
+						
+						
+							<div class="ui-inputgroup-addon">P</div>
+							<p:selectOneMenu value="#{beanPessoa.pessoa.perfil}" style="width:8%;">
+							
+								 <f:selectItem itemLabel="Perfil" itemValue="#{beanPessoa.pessoa.perfil}" noSelectionOption="true"/>
+				                 <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+				                 <f:selectItem itemLabel="Básico" itemValue="Básico"/>
+							
+							</p:selectOneMenu>
+							
+							
+						</div>
+					</div>
+					
+					
+
+				</div>
+				
+				<h5>Dados do Endereço</h5>
+				<div class="p-grid  ui-fluid">
+				
+					<div class="p-col-12 p-md-4" >
+						<div class="ui-inputgroup">
+						
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-map-marker"></i>
+							</div>
+							<p:inputMask mask="99.999-999" placeholder="CEP" id="cep" style="width:20%;" value="#{beanPessoa.pessoa.cep}">
+								<f:ajax event="blur" execute="@this" listener="#{beanPessoa.pesquisaCep}" 
+				 				render="logradouro bairro cidade uf"/>
+							</p:inputMask>
+							
+							<div class="ui-inputgroup-addon" style="">
+								<i class="pi pi-flag"></i>
+							</div>
+							<p:inputText placeholder="Numero Residencial" id="numeroResidecial" style="width:10.5%;" value="#{beanPessoa.pessoa.numeroResidencial}"/>
+							
+						</div>
+					</div>					
+				
+					<div class="p-col-12 p-md-4" style="margin-top:5px;">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-directions"></i>
+							</div>
+							<p:inputText placeholder="Logradouro" id="logradouro" style="width:42%;" value="#{beanPessoa.pessoa.logradouro}"/>
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4" style="margin-top:5px;">
+						<div class="ui-inputgroup">
+						
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-map-marker"></i>
+							</div>
+							<p:inputText placeholder="Bairro" id="bairro" style="width:20%;" value="#{beanPessoa.pessoa.bairro}"/>
+							
+							<div class="ui-inputgroup-addon" style="">
+								<i class="pi pi-map"></i>
+							</div>
+							<p:inputText placeholder="Cidade" id="cidade"  style="width:10.5%;" value="#{beanPessoa.pessoa.localidade}"/>
+							
+							<div class="ui-inputgroup-addon" style="">
+								<i class="pi pi-flag"></i>
+							</div>
+							<p:inputText placeholder="UF" id="uf"  style="width:10.5%;" value="#{beanPessoa.pessoa.uf}"/>
+							
+							
+						</div>
+					</div>	
+
+				</div>
+				
+				<!-- Botões do Formulário -->
+				
+				<div class="p-col-12 p-md-4" style="margin-top:15px;">
+					<p:commandButton icon="pi pi-check" styleClass="ui-button-success" value="Salvar" action="#{beanPessoa.salvar}" update="@form"/>
+					<p:commandButton icon="pi pi-check" styleClass="ui-button-warning" value="Limpar" style="margin-left:10px;" type="reset" />
+				</div>
+				
+				<!-- <h5>Multiple Addons</h5>
+				<div class="p-grid ui-fluid">
+					<div class="p-col-12">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-tags" />
+							</div>
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-shopping-cart" />
+							</div>
+							<p:inputText placeholder="Price" />
+							<div class="ui-inputgroup-addon">$</div>
+							<div class="ui-inputgroup-addon">.00</div>
+						</div>
+					</div>
+				</div> -->
+
+				<!-- <h5>Button Addons</h5>
+				<div class="p-grid ui-fluid">
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<p:commandButton value="Search" />
+							<p:inputText placeholder="Keyword" />
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<p:inputText placeholder="Keyboard" />
+							<p:commandButton icon="pi pi-search"
+								styleClass="ui-button-warning" />
+						</div>
+					</div>
+
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<p:commandButton icon="pi pi-check"
+								styleClass="ui-button-success" />
+							<p:inputText placeholder="Vote" />
+							<p:commandButton icon="pi pi-times" styleClass="ui-button-danger" />
+						</div>
+					</div>
+				</div>
+
+				<h5>Checkbox</h5>
+				<div class="p-grid ui-fluid">
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<p:selectBooleanCheckbox />
+							</div>
+							<p:inputText placeholder="Username" />
+						</div>
+					</div>
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<p:inputText placeholder="Username" />
+							<div class="ui-inputgroup-addon">
+								<p:radioButton for="radioDemo" itemIndex="0" />
+							</div>
+						</div>
+					</div>
+					<div class="p-col-12 p-md-4">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<p:selectBooleanCheckbox />
+							</div>
+							<p:inputText placeholder="Username" />
+							<div class="ui-inputgroup-addon">
+								<p:radioButton for="radioDemo" itemIndex="0" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p:selectOneRadio id="radioDemo" layout="custom" unselectable="true">
+					<f:selectItem itemValue="demo" />
+				</p:selectOneRadio> -->
+			</div>
+		</h:form>
+
+	</p:fieldset>
+
+
+
+</h:body>
+
+</html>

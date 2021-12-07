@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Relatorios</title>
+</h:head>
+
+
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+
+
+	<p:fieldset legend="Relatorios" style="margin-top:15px;">
+
+		<h:form id="formBuscaRelatorio">
+			<div class="card">
+
+				<p:messages id="message" showDetail="true" closable="true">
+					<p:autoUpdate />
+				</p:messages>
+
+
+				<div class="p-grid  ui-fluid">
+					<div class="p-col-12 p-md-4">
+						<p:commandButton icon="pi pi-search"
+							styleClass="rounded-button ui-button-success"
+							action="#{beanRelatorios.buscar}" update="@all" />
+
+					</div>
+				</div>
+
+			</div>
+		</h:form>
+
+		<h:form id="formRelatorio">
+			<div class="card">
+
+				<p:commandButton icon="pi pi-file-pdf"
+					styleClass="rounded-button ui-button-danger"
+					update="@all">
+					<p:dataExporter type="pdf" target="tbl" fileName="usuarios"
+						pageOnly="true" />
+				</p:commandButton>
+
+				<p:dataTable id="tbl" var="usuario"
+					value="#{beanRelatorios.usuarios}">
+					<p:column headerText="ID">
+							<h:outputText value="#{usuario.id}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value="#{usuario.nomeCompleto}" />
+						</p:column>
+						<p:column headerText="Perfil">
+							<h:outputText value="#{usuario.perfil}" />
+						</p:column>
+						<p:column headerText="Data de Cadastro">
+							<h:outputText value="#{usuario.dtaCadastro}" >
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</p:column>
+				</p:dataTable>
+
+			</div>
+		</h:form>
+	</p:fieldset>
+
+
+</h:body>
+
+</html>

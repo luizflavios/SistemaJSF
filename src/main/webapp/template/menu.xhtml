@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<div class="card">
+	
+    <h:form>
+        
+
+        <p:menubar>
+        
+        	<p:submenu label="Usuários" icon="pi pi-fw pi-user" rendered="#{beanPessoa.permiteAcesso('Administrador')}">
+        	
+        		
+        		<p:menuitem value="Novo" icon="pi pi-fw pi-user-plus" url="#{request.contextPath}/pages/cadastroUsuario.jsf" />        		
+        		<p:menuitem value="Procurar	" icon="pi pi-fw pi-users" url="#{request.contextPath}/pages/pesquisaUsuario.jsf" />
+        		
+        	</p:submenu>
+        	
+        	<p:divider layout="vertical"/>
+        	
+        	<p:submenu label="Lançamentos" icon="pi pi-fw pi-file">
+
+                <p:menuitem value="Novo" icon="pi pi-fw pi-plus" url="#{request.contextPath}/pages/lancamento.jsf"/>                
+                <p:menuitem value="Ver" icon="pi pi-search" url="#{request.contextPath}/pages/pesquisaLancamento.jsf"/>
+                
+            </p:submenu>
+            
+            <p:divider layout="vertical"/>
+            
+              <p:submenu label="Relatorios" icon="pi pi-fw pi-desktop">
+
+                <p:menuitem value="Usuários" icon="pi pi-fw pi-user" url="#{request.contextPath}/pages/relatorioUsuario.jsf"/> 
+                <p:menuitem value="Lançamentos" icon="pi pi-fw pi-file" />                  
+               
+                
+            </p:submenu>
+            
+            
+            <p:divider layout="vertical"/>
+            
+            <p:submenu label="Extra" icon="pi pi-fw pi-link">
+
+                <p:menuitem value="Upload" icon="pi pi-fw pi-send" url="#{request.contextPath}/pages/upload.jsf"/>                
+               
+                
+            </p:submenu>
+        	
+        	<p:divider layout="vertical"/>
+        	
+        	<p:menuitem value="Home" icon="pi pi-home" url="#{request.contextPath}/pages/home.jsf" />
+        	
+        	<f:facet name="options">
+                <p:commandButton action="#{beanPessoa.deslogar}" value="Sair" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+            </f:facet>
+        
+        </p:menubar>
+        
+        
+    </h:form>
+    
+</div>
+	
+
+</html>

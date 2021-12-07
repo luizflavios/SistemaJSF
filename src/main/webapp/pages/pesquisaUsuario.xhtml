@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Usuários Cadastrados</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+
+	<p:fieldset legend="Pesquisa de Usuário" style="margin-top:15px;">
+
+		<h:form id="formularioPesquisaUsuario">
+			<div class="card" id="divDemais">
+
+				<p:selectOneMenu style="width:30%;" >
+
+					<f:selectItem itemLabel="Selecione o Parâmetro"
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="Nome" itemValue="Nome" />
+					<f:selectItem itemLabel="Data de Cadastro"
+						itemValue="Data de Cadastro" />
+
+				</p:selectOneMenu>
+				
+			</div>
+			
+			<div class="card" style="margin-top:5px;">
+				
+				<p:inputText value="#{beanPessoa.parametro}" placeholder="Digite o nome"/>
+			
+			</div>
+			
+			<div class="card" style="margin-top:5px;">
+				<div class="ui-fluid p-grid p-formgrid">
+		            <div class="p-field p-col-12 p-md-4">
+		                
+		                <p:datePicker id="basic" locale="pt" style="width:20%;" />
+		                <p:datePicker id="dada" locale="pt" style=" width:20%;" />
+		            </div>
+	            </div>
+            </div>
+			
+			<p:commandButton value="Pesquisar" action="#{beanPessoa.consultaPersonalizada }" update="@all" style="margin-top:5px;"/>
+				
+			
+
+		</h:form>
+
+	</p:fieldset>
+
+	<p:fieldset legend="Usuários Cadastrados" style="margin-top:15px;">
+
+		<h:form id="formularioUsuariosCadastrados">
+			<div class="card">
+
+				<div class="card">
+
+					<p:dataTable var="pessoa" value="#{beanPessoa.listaPessoas}"
+						scrollable="true" scrollHeight="250">
+						<p:column headerText="Nome">
+							<h:outputText value="#{pessoa.nomeCompleto}" />
+						</p:column>
+						<p:column headerText="Email">
+							<h:outputText value="#{pessoa.email}" />
+						</p:column>
+						<p:column headerText="Sexo">
+							<h:outputText value="#{pessoa.sexo}" />
+						</p:column>
+						<p:column headerText="Nivel de Acesso">
+							<h:outputText value="#{pessoa.perfil}" />
+						</p:column>
+					</p:dataTable>
+				</div>
+
+			</div>
+		</h:form>
+
+	</p:fieldset>
+
+	<script>
+    PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Seguinte',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Apenas Hora',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            millisecondText: 'Milisegundo',
+            currentText: 'Data Atual',
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o dia',
+            today: 'Hoje',
+            clear: 'Claro'
+        };
+	</script>
+</h:body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Uploads</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/template/menu.xhtml" />
+	
+	<p:fieldset legend="Upload" style="margin-top:15px;">
+		
+		<h:form enctype="multipart/form-data">
+			<div class="card">
+				
+				<p:messages id="message" showDetail="true" closable="true" >
+					<p:autoUpdate/>
+				</p:messages>
+				
+				<div class="p-grid  ui-fluid">
+					
+
+					<p:fileUpload id="foto" value="#{beanUpload.arquivo}" mode="simple" skinSimple="true" />
+					<p:commandButton value="Salvar" ajax="false" action="#{beanUpload.salvar}" styleClass="p-mt-3 ui-button-outlined p-d-block" style="width:8%;"/>
+					
+				</div>
+				
+			</div>
+		</h:form>
+		
+		<h:form style="margin-top:10px;">
+			<div class="card">
+				<div class="p-grid  ui-fluid">
+					
+					<p:dataTable value="#{beanUpload.listaUpload}" var="upload" scrollable="true" scrollHeight="250" >
+						<p:column headerText="ID" >
+							<h:outputText value="#{upload.id}" />
+						</p:column>
+						<p:column headerText="EXTENSAO" >
+							<h:outputText value="#{upload.extensaoFoto}" />
+						</p:column>
+						
+					</p:dataTable>
+					
+				</div>				
+			</div>
+		</h:form>
+		
+	</p:fieldset>
+	
+	
+</h:body>
+</html>
